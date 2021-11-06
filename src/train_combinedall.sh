@@ -6,7 +6,8 @@ BASE_PATH='<base path>'
 DATASET_TYPE='mrbrain_t1','mrbrain_flair'
 # MASK type indicates the kind of mask pattern which we use in the training. For example, if we use two mask types -Cartesian and Gaussian we set this as follows
 MASK_TYPE='cartesian','gaussian'
-# the acceleration factor for reconstruction is the third setting. The acceleration factor value along with 'x' character. This is set as follows.
+# the acceleration factor for reconstruction is the third setting. The acceleration factor value along with 'x' character. 
+# Suppose three acceleration factors 4x,5x and 8x are combined, this is set as follows
 ACC_FACTORS='4x','5x','8x'
 BATCH_SIZE=4
 NUM_EPOCHS=150

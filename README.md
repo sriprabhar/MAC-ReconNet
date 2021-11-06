@@ -34,20 +34,20 @@ For example, 1. if we intend to combine T1 and FLAIR as two different data types
 For these settings the folder hierarchy is
 
 
-												datasets
-													|
-							-----------------------------------------------------
-							|													|
-						mrbrain_t1											mrbrain_flair
-							|													|
-					----------------							---------------------------------
-					|				|							|								|
-				cartesian		gaussian					cartesian						gaussian
-					|				|							|								|
-		train, validation		train, validation			train, validation			train, validation
-		----------------		----------------			---------------				-----------------
-		|		|		|		|		|		|			|		|		|	   		|		|		|
-	acc_4x	acc_5x	acc_8x	acc_4x	acc_5x	acc_8x		acc_4x	acc_5x	acc_8x		acc_4x	acc_5x	acc_8x
+											      datasets
+												|
+							------------------------------------------------------------------------
+							|									|
+						mrbrain_t1								mrbrain_flair
+							|									|
+					-------------------------						---------------------------------
+					|			|					        |				|
+				    cartesian	         gaussian					     cartesian			     gaussian
+				      |			   |					                |				|
+		train, validation		train, validation			               train, validation	        train, validation
+		----------------		----------------			                ---------------			-----------------
+                |	|	|		|	|	|					|	|	|	   	|	|	|
+	     acc_4x  acc_5x   acc_8x	     acc_4x  acc_5x   acc_8x		                  acc_4x     acc_5x   acc_8x	      acc_4x  acc_5x	acc_8x
 
 
 The folder hierarchy for the under-sampling masks are stored in a folder seperately as follows.
