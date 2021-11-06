@@ -1,7 +1,7 @@
 # MAC-ReconNet-Multiple-Acquisition-Context-based-CNN
 ### *A single network that uses dynamic weight prediction for multiple acquisition context-based MRI Reconstruction* 
 > [MAC-ReconNet:  A Multiple Acquisition Context based Convolutional Neural Network for MR Image Reconstruction using Dynamic Weight Prediction](http://proceedings.mlr.press/v121/ramanarayanan20a.html) (MIDL 2020) 
-![MAC-ReconNet Architecture](images/architecture.png)
+![MAC-ReconNet Architecture](src/images/architecture.png)
 
 ## Dependencies
 #### Packages
