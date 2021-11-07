@@ -67,11 +67,6 @@ class SliceData(Dataset):
             #uskspace_cmplx = kspace_cmplx * self.mask
             #zf_img = np.abs(np.fft.ifft2(uskspace_cmplx,norm='ortho'))
             
-            #if self.dataset_type == 'cardiac':
-                # Cardiac dataset should be padded,150 becomes 160. # this can be commented for kirby brain 
-                #input_img  = np.pad(input_img,(5,5),'constant',constant_values=(0,0))
-                #target = np.pad(target,(5,5),'constant',constant_values=(0,0))
-
             # Print statements
             #print (input.shape,target.shape)
             #return torch.from_numpy(zf_img), torch.from_numpy(target)
@@ -142,12 +137,6 @@ class SliceDataDev(Dataset):
             #kspace_cmplx = np.fft.fft2(target,norm='ortho')
             #uskspace_cmplx = kspace_cmplx * self.mask
             #zf_img = np.abs(np.fft.ifft2(uskspace_cmplx,norm='ortho'))
- 
-
-            #if self.dataset_type == 'cardiac':
-                # Cardiac dataset should be padded,150 becomes 160. # this can be commented for kirby brain 
-                #input_img  = np.pad(input_img,(5,5),'constant',constant_values=(0,0))
-                #target = np.pad(target,(5,5),'constant',constant_values=(0,0))
 
             # Print statements
             #print (input.shape,target.shape)
@@ -215,12 +204,6 @@ class SliceDisplayDataDev(Dataset):
             #kspace_cmplx = np.fft.fft2(target,norm='ortho')
             #uskspace_cmplx = kspace_cmplx * self.mask
             #zf_img = np.abs(np.fft.ifft2(uskspace_cmplx,norm='ortho'))
- 
-
-            #if self.dataset_type == 'cardiac':
-                # Cardiac dataset should be padded,150 becomes 160. # this can be commented for kirby brain 
-                #input_img  = np.pad(input_img,(5,5),'constant',constant_values=(0,0))
-                #target = np.pad(target,(5,5),'constant',constant_values=(0,0))
 
             # Print statements
             #print (input.shape,target.shape)
