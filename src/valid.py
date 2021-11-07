@@ -29,7 +29,6 @@ def save_reconstructions(reconstructions, out_dir):
 def create_data_loaders(args):
 
     #data = SliceDataDev(args.data_path,args.acceleration_factor,args.dataset_type,args.usmask_path)
-    #data = SliceDataDev(args.data_path,args.acceleration_factor,args.dataset_type)
     data = SliceDataDev(args.data_path,args.acceleration_factor,args.dataset_type,args.mask_type)
     data_loader = DataLoader(
         dataset=data,
@@ -63,9 +62,7 @@ def run_unet(args, model, data_loader):
     with torch.no_grad():
         for (iter,data) in enumerate(tqdm(data_loader)):
 
-            #input, input_kspace,target,fnames,slices = data
 
-            #input, input_kspace,target,fnames,slices,gamma_val,acc_factor_string,mask_string = data
             input, input_kspace,target,fnames,slices,gamma_val,acc_factor_string,mask_string,dataset_string = data
 
             input = input.unsqueeze(1).to(args.device).float()
@@ -74,12 +71,8 @@ def run_unet(args, model, data_loader):
 
             input = input.float()
 
-            #recons = model(input,input_kspace).to('cpu').squeeze(1)
             #print (input.shape,acc_val.shape)
             recons = model(input,input_kspace, gamma_val, acc_factor_string, mask_string,dataset_string).to('cpu').squeeze(1)
-
-            #if args.dataset_type == 'cardiac':
-            #    recons = recons[:,5:155,5:155]
 
             
             for i in range(recons.shape[0]):

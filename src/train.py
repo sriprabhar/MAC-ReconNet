@@ -26,9 +26,6 @@ logger = logging.getLogger(__name__)
 def create_datasets(args):
 
     
-    #train_data = SliceData(args.train_path,args.acceleration_factor,args.dataset_type,args.usmask_path)
-    #dev_data = SliceData(args.validation_path,args.acceleration_factor,args.dataset_type,args.usmask_path)
-    #print("create dataset: ",args.acceleration_factor)
     acc_factors = args.acceleration_factor.split(',')
     mask_types = args.mask_type.split(',')
     dataset_types = args.dataset_type.split(',')
@@ -41,7 +38,6 @@ def create_datasets(args):
     return dev_data, train_data, display1_data, display2_data
 
 def create_data_loaders(args):
-    #dev_data, train_data = create_datasets(args)
     dev_data, train_data, display1_data, display2_data = create_datasets(args)
 
     #display_data = [dev_data[i] for i in range(0, len(dev_data), len(dev_data) // 16)]
@@ -151,7 +147,6 @@ def evaluate(args, epoch, model, data_loader, writer):
     with torch.no_grad():
         for iter, data in enumerate(tqdm(data_loader)):
     
-            #input, input_kspace,target = data
             input, input_kspace, target,gamma_val, acc_factor_string, mask_string, dataset_string = data
 
             input = input.unsqueeze(1).to(args.device)
@@ -163,7 +158,6 @@ def evaluate(args, epoch, model, data_loader, writer):
             target = target.float()
             gamma_val = gamma_val.float()
     
-            #output = model(input, acc_val)
             output = model(input,input_kspace, gamma_val, acc_factor_string, mask_string, dataset_string)
             #loss = F.mse_loss(output,target, size_average=False)
             loss = F.mse_loss(output,target)
@@ -177,7 +171,6 @@ def evaluate(args, epoch, model, data_loader, writer):
     return np.mean(losses), time.perf_counter() - start
 
 
-#def visualize(args, epoch, model, data_loader, writer):
 def visualize(args, epoch, model, data_loader, writer,datasettype_string):
     
     def save_image(image, tag):
@@ -264,12 +257,10 @@ def build_optim(args, params):
 
 def main(args):
     args.exp_dir.mkdir(parents=True, exist_ok=True)
-    #writer = SummaryWriter(logdir=str(args.exp_dir / 'summary'))
     writer = SummaryWriter(log_dir=str(args.exp_dir / 'summary'))
 
     if args.resume:
         print('resuming model, batch_size', args.batch_size)
-        #checkpoint, model, optimizer, disc, optimizerD = load_model(args, args.checkpoint)
         checkpoint, model, optimizer, disc, optimizerD = load_model(args.checkpoint)
         args = checkpoint['args']
         args.batch_size = 28
@@ -290,7 +281,6 @@ def main(args):
     logging.info(args)
     logging.info(model)
 
-    #train_loader, dev_loader, display_loader = create_data_loaders(args)
     train_loader, dev_loader, display1_loader, display2_loader = create_data_loaders(args)
     #print ("Dataloader initialized")
     scheduler = torch.optim.lr_scheduler.StepLR(optimizer, args.lr_step_size, args.lr_gamma)
@@ -300,7 +290,6 @@ def main(args):
         scheduler.step(epoch)
         train_loss,train_time = train_epoch(args, epoch, model, train_loader,optimizer,writer)
         dev_loss,dev_time = evaluate(args, epoch, model, dev_loader, writer)
-        #visualize(args, epoch, model, display_loader, writer)
         visualize(args, epoch, model, display1_loader, writer,'t1')
         visualize(args, epoch, model, display2_loader, writer,'flair')
 
